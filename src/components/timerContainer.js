@@ -6,32 +6,47 @@ import { connect } from "react-redux";
 
 class TimerContainer extends Component {
     state = {
-        configPage: false
+        configPage: false,
+        timerPage:true
     };
-    addConfigToggle = () => {
-        this.setState({ configPage: true });
+    configDisplay = () => {
+        this.setState({ configPage: true,timerPage: false });
     };
-    addConfig = config => {
-        /* Redux */ this.props.addConfig(config);
-        this.setState({ configPage: false });
+
+    updateConfig = config => {
+        if(config){
+        this.timerDisplay();
+        }
     };
+    timerDisplay = ()=>{
+        this.setState({ configPage: false,timerPage:true });
+    }
     render() {
         return (
             <div>
+                <div className="row">
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={this.addConfigToggle}
+                    onClick={this.timerDisplay}
+                >
+                    {" "}
+                    Timer{" "}
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.configDisplay}
                 >
                     {" "}
                     Config{" "}
                 </Button>
-
-                {/* {this.props.config ? (
+                </div>
+                {this.props.config ? (
                     <div>{this.props.config.name},{this.props.config.time}</div>
-                ) : null} */}
+                ) : null}
                 {this.state.configPage ? (
-                    <ConfigTimer />
+                    <ConfigTimer updateConfig={this.updateConfig}/>
                 ) : null}
             </div>
         )

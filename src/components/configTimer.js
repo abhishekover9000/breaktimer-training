@@ -35,7 +35,7 @@ class ConfigTimer extends Component {
             time: time
         }
         this.props.addConfig(config);
-        console.log(this.props.config);
+        this.props.updateConfig(true);
     }
 
 
@@ -79,7 +79,6 @@ class ConfigTimer extends Component {
                         {" "}
                         Add Conifg{" "}
                     </Button>
-                    {this.props.config ? (this.props.config.time) : null}
                 </form>
             </div>
         )

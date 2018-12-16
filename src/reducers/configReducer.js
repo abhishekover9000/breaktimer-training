@@ -14,7 +14,7 @@ const config = (
         newName = action.payload.name;
         newTime = action.payload.time;
         return Object.assign({}, state, {
-          newName,newTime
+          name:newName,time:newTime
         });
       default:
         return state;
