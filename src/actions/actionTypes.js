@@ -3,4 +3,5 @@ export const actionTypes = {
   RESET: "RESET",
   RESUME: "RESUME",
   START: "START",
+  DECREMENT: "DECREMENT"
 };

@@ -33,6 +33,12 @@ export default function (state = {
       state.isInTimer = false;
 
       return Object.assign({}, state, newState)
+    case actionTypes.DECREMENT:
+      const newState = state;
+      state.display = convertSecs(action.payload);
+      state.countSecs = action.payload;
+
+      return Object.assign({}, state, newState)
     default:
       return state;
    }

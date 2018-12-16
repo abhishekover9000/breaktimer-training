@@ -27,3 +27,10 @@ export const reset = () => {
     payload: null,
   };
 }
+
+export const decrement = (seconds) => {
+  return {
+    type: actionTypes.DECREMENT,
+    payload: seconds,
+  }
+}
