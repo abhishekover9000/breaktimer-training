@@ -1,52 +1,29 @@
 import { actionTypes } from "./actionTypes";
 
-// NEVER DO THIS IN PRODUCTION - keep as an environment variable
-const WEATHER_API_KEY = "16be0f58725f612e0265b2ff572a7516";
-
-export const addItem = payload => {
+export const start = seconds => {
   return {
-    type: actionTypes.ADD_ITEM,
-    payload
+    type: actionTypes.START,
+    payload: seconds,
   };
 };
 
-export const deleteItem = payload => {
+export const pause = () => {
   return {
-    type: actionTypes.DELETE_ITEM,
-    payload
+    type: actionTypes.PAUSE,
+    payload: null,
   };
 };
 
-export const completeItem = payload => {
+export const resume = () => {
   return {
-    type: actionTypes.COMPLETE_ITEM,
-    payload
+    type: actionTypes.RESUME,
+    payload: null,
   };
 };
 
-export const getWeather = payload => {
-  // api.openweathermap.org/data/2.5/weather?zip=94040,us
-  return async dispatch2 => {
-    dispatch2({
-      type: actionTypes.GET_WEATHER,
-      payload: null
-    });
-
-    const response = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?zip=94538,us&units=imperial&APPID=${WEATHER_API_KEY}`,
-      {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        mode: "cors",
-
-        method: "GET"
-      }
-    );
-    const json = await response.json();
-    if (response.ok) {
-      dispatch2({ type: actionTypes.GET_WEATHER_SUCCESS, payload: json });
-    } else dispatch2({ type: actionTypes.GET_WEATHER_ERROR, payload: json });
+export const reset = () => {
+  return {
+    type: actionTypes.RESET,
+    payload: null,
   };
-};
+}
