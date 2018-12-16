@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
+import {connect} from 'react-redux';
+import { start, pause, resume, reset, decrement } from '../actions/actions';
+
 
 class TimerContainer extends Component {
   state = {
@@ -92,4 +95,15 @@ class TimerContainer extends Component {
     );
   }
 }
-export default TimerContainer;
+const mapStateToProps = (state) => {
+  return {
+    timerInfo: state.timerInfo,
+  }
+}
+export default connect(mapStateToProps, {
+  start,
+  pause,
+  resume,
+  reset,
+  decrement
+})(TimerContainer);
