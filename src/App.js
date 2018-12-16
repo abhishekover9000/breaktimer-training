@@ -7,12 +7,13 @@ import rootReducer from "./reducers/reducers";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
+import TimerContainer from './components/TimerContainer';
 
 class App extends Component {
   render() {
     return (
       <Provider store={createStore(rootReducer, applyMiddleware(thunk))}>
-        <div> lets add things </div>
+        <div> <TimerContainer/> </div>
       </Provider>
     );
   }
