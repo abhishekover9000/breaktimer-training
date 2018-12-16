@@ -7,6 +7,13 @@ export const start = seconds => {
   };
 };
 
+export const addConfig = payload => {
+  return {
+    type: actionTypes.ADD_CONFIG,
+    payload
+  };
+};
+
 export const pause = () => {
   return {
     type: actionTypes.PAUSE,

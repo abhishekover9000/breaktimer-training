@@ -1,18 +1,20 @@
 import React, { Component } from "react";
+import ConfigTimer from "./configTimer";
+import Button from "@material-ui/core/Button";
+import { start, pause, resume, reset, decrement } from "../actions/actions";
+import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
-import Button from '@material-ui/core/Button';
-import {connect} from 'react-redux';
-import { start, pause, resume, reset, decrement } from '../actions/actions';
-
 
 class TimerContainer extends Component {
-  state = {
-    hrs: '',
-    mins: '',
-    secs: '',
-    interval: '',
-  }
-  handleHours = (e) => {
+    state = {
+        configPage: false,
+        timerPage: true,
+        hrs: '',
+        mins: '',
+        secs: '',
+        interval: ''
+    };
+handleHours = (e) => {
 
     this.setState({ hrs: Number(e.target.value * 3600) });
     const hsecs = e.target.value * 3600;
@@ -70,12 +72,42 @@ class TimerContainer extends Component {
     console.log(nextProps);
     return true;
   }
-  render() {
-    const { timerInfo } = this.props;
+    configDisplay = () => {
+        this.setState({ configPage: true, timerPage: false });
+    };
+
+    updateConfig = config => {
+        if (config) {
+            this.timerDisplay();
+        }
+    };
+    timerDisplay = () => {
+        this.setState({ configPage: false, timerPage: true });
+    }
+    render() {
+          const { timerInfo } = this.props;
     const { hrs, mins, secs } = timerInfo.display;
-    console.log(timerInfo);
-    return (
-      <div>
+        return (
+            <div>
+                <div className="row">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.timerDisplay}
+                    >
+                        {" "}
+                        Timer{" "}
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.configDisplay}
+                    >
+                        {" "}
+                        Config{" "}
+                    </Button>
+                </div>
+           <div>
         {!timerInfo.isInTimer ?
           <React.Fragment>
             <TextField
@@ -131,12 +163,21 @@ class TimerContainer extends Component {
           </React.Fragment>
         }
       </div>
-    );
-  }
+                {this.props.config ? (
+                    <div>{this.props.config.name},{this.props.config.time}</div>
+                ) : null}
+                {this.state.configPage ? (
+                    <ConfigTimer updateConfig={this.updateConfig} />
+                ) : null}
+            </div>
+        )
+    }
+
 }
 const mapStateToProps = (state) => {
   return {
     timerInfo: state.timerInfo,
+    config: state.config
   }
 }
 export default connect(mapStateToProps, {
@@ -145,4 +186,6 @@ export default connect(mapStateToProps, {
   resume,
   reset,
   decrement
-})(TimerContainer);
+}
+)(TimerContainer);
+
