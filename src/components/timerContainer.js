@@ -7,46 +7,46 @@ import { connect } from "react-redux";
 class TimerContainer extends Component {
     state = {
         configPage: false,
-        timerPage:true
+        timerPage: true
     };
     configDisplay = () => {
-        this.setState({ configPage: true,timerPage: false });
+        this.setState({ configPage: true, timerPage: false });
     };
 
     updateConfig = config => {
-        if(config){
-        this.timerDisplay();
+        if (config) {
+            this.timerDisplay();
         }
     };
-    timerDisplay = ()=>{
-        this.setState({ configPage: false,timerPage:true });
+    timerDisplay = () => {
+        this.setState({ configPage: false, timerPage: true });
     }
     render() {
         return (
             <div>
                 <div className="row">
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.timerDisplay}
-                >
-                    {" "}
-                    Timer{" "}
-                </Button>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.configDisplay}
-                >
-                    {" "}
-                    Config{" "}
-                </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.timerDisplay}
+                    >
+                        {" "}
+                        Timer{" "}
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.configDisplay}
+                    >
+                        {" "}
+                        Config{" "}
+                    </Button>
                 </div>
                 {this.props.config ? (
                     <div>{this.props.config.name},{this.props.config.time}</div>
                 ) : null}
                 {this.state.configPage ? (
-                    <ConfigTimer updateConfig={this.updateConfig}/>
+                    <ConfigTimer updateConfig={this.updateConfig} />
                 ) : null}
             </div>
         )
@@ -56,6 +56,5 @@ class TimerContainer extends Component {
 export default connect(
     state => {
         return { config: state.config };
-    },
-    { addConfig }
+    }
 )(TimerContainer);

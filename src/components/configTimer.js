@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 
 class ConfigTimer extends Component {
     state = {
-        config: {},
         time: 0,
         name: "",
         hours: 0,
@@ -40,8 +39,6 @@ class ConfigTimer extends Component {
 
 
     render() {
-        console.log(this.state.time);
-
         return (
             <div>
                 <form>
@@ -77,7 +74,7 @@ class ConfigTimer extends Component {
                     />
                     <Button onClick={this.submit} color="primary">
                         {" "}
-                        Add Conifg{" "}
+                        Add Config{" "}
                     </Button>
                 </form>
             </div>
