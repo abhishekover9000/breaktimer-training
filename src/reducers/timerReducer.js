@@ -19,6 +19,12 @@ export default function (state = {
       state.display = convertSecs(action.payload);
 
       return Object.assign({}, state, newState);
+      case actionTypes.LOAD:
+      state.countSecs = action.payload;
+      state.isInTimer = true;
+      state.display = convertSecs(action.payload);
+
+      return Object.assign({}, state, newState);
     case actionTypes.PAUSE:
       state.isPause = true;
 

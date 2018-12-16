@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ConfigTimer from "./configTimer";
 import Button from "@material-ui/core/Button";
-import { start, pause, resume, reset, decrement } from "../actions/actions";
+import { load,start, pause, resume, reset, decrement } from "../actions/actions";
 import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 
@@ -85,7 +85,8 @@ class TimerContainer extends Component {
         this.setState({ configPage: false, timerPage: true });
     }
     load =() => {
-        console.log("load functionality");
+        const {config, load} = this.props;
+        load(config.time);
     }
     render() {
         const { timerInfo } = this.props;
@@ -200,6 +201,7 @@ export default connect(mapStateToProps, {
     pause,
     resume,
     reset,
+    load,
     decrement
 }
 )(TimerContainer);

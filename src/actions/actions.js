@@ -41,3 +41,10 @@ export const decrement = (seconds) => {
     payload: seconds,
   }
 }
+
+export const load = (seconds) => {
+  return {
+    type: actionTypes.LOAD,
+    payload: seconds,
+  }
+}
