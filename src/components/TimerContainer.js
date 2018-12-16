@@ -7,6 +7,8 @@ class TimerContainer extends Component {
     hrs: '',
     mins:'',
     secs:'',
+    isInTimer : false,
+    
   }
 
   handleHours = (e) => {
@@ -28,13 +30,14 @@ class TimerContainer extends Component {
   };
   handleStart= () =>{
     const total = Number (this.state.hrs + this.state.mins +this.state.secs);
+    this.setState({isInTimer : true});
     console.log(total);
 
   }
 
 
-calSeconds =()=>{
-
+  handleRestart =()=>{
+this.setState({isInTimer : false});
 }
 
 
@@ -42,7 +45,8 @@ calSeconds =()=>{
   render(){
       return(
 <div>
-
+{!this.state.isInTimer?
+  <React.Fragment>
      <TextField
          
           label="Hours"
@@ -78,10 +82,21 @@ calSeconds =()=>{
           margin="normal"
         />
         <br/>
-        <Button color="primary" onClick = {this.handleStart}>
+        {this.state.hrs > 0 || this.state.mins > 0 || this.state.secs > 0 ?
+        <React.Fragment><Button color="primary" onClick = {this.handleStart} >
         Start Timer
-      </Button>
+      </Button> </React.Fragment>: <p><b>Enter values to start timer</b></p>
+      
+    }
+     </React.Fragment> 
+     :
+     <React.Fragment>
+       <p>Remaining Hours       Minutes            Seconds</p>
+     <Button color="primary">Pause</Button>
+     <Button color="primary" onClick = {this.handleRestart}>Restart</Button>
+     </React.Fragment>
 
+}
     </div>
 
 
