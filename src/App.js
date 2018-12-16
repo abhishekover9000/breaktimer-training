@@ -9,33 +9,43 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import ConfigTimer from "./components/configTimer";
 import Button from "@material-ui/core/Button";
+import { addConfig } from "./actions/actions";
+import { connect } from "react-redux";
 
 class App extends Component {
   state = {
     configPage: false
   };
-addItemToggle = () => {
+  addConfigToggle = () => {
     this.setState({ configPage: true });
   };
-
+  addConfig = config => {
+    /* Redux */ this.props.addConfig(config);
+    this.setState({ configPage: false });
+  };
   render() {
     return (
       <Provider store={createStore(rootReducer, applyMiddleware(thunk))}>
         <Button
-            variant="contained"
-            color="primary"
-            onClick={this.addItemToggle}
-          >
-            {" "}
-            Config{" "}
-          </Button>
-        
+          variant="contained"
+          color="primary"
+          onClick={this.addConfigToggle}
+        >
+          {" "}
+          Config{" "}
+        </Button>
+
         {this.state.configPage ? (
-          <ConfigTimer/>
+          <ConfigTimer addConfig={this.addConfig} />
         ) : null}
       </Provider>
     );
   }
 }
 
-export default App;
+export default connect(
+  state => {
+    return { config: state.config };
+  },
+  { addConfig }
+)(App);
