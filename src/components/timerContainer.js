@@ -47,7 +47,16 @@ class TimerContainer extends Component {
     clearInterval(this.state.interval);
     reset()
   }
-
+  handlePause = () =>{
+ 
+    const { pause } = this.props;
+    pause();
+  }
+  handleResume = () =>{
+ 
+    const { resume } = this.props;
+    resume();
+  }
   handleDecrement = () => {
     const { timerInfo, decrement } = this.props;
     const {isPause} = timerInfo
@@ -116,7 +125,8 @@ class TimerContainer extends Component {
             <p>{`Remaining Hours: ${hrs}`}</p>
             <p>{`Minutes: ${mins}`}</p>
             <p>{`Seconds: ${secs}`}</p>
-            <Button color="primary">Pause</Button>
+            <Button color="primary" onClick ={this.handlePause}>Pause</Button>
+            <Button color="primary" onClick ={this.handleResume}>Resume</Button>
             <Button color="primary" onClick={this.handleRestart}>Restart</Button>
           </React.Fragment>
         }
