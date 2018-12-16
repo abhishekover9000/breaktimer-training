@@ -30,9 +30,15 @@ export default function (state = {
     case actionTypes.RESET:
       state.isInTimer = false;
 
-      return Object.assign({}, state, newState)
+      return Object.assign({}, state, {
+        display: { hrs: 0, mins: 0, secs: 0 },
+        countSecs: 0,
+        isPause: false,
+        isInTimer: false,
+      });
     case actionTypes.DECREMENT:
-      state.display = convertSecs(action.payload);
+      const decremented = action.payload -= 1;
+      state.display = convertSecs(decremented);
       state.countSecs = action.payload;
 
       return Object.assign({}, state, newState)

@@ -10,8 +10,7 @@ class TimerContainer extends Component {
     hrs: '',
     mins: '',
     secs: '',
-    isInTimer: false,
-
+    interval: '',
   }
   handleHours = (e) => {
 
@@ -30,17 +29,45 @@ class TimerContainer extends Component {
     console.log(e.target.value);
   };
   handleStart = () => {
+    // Use start action
+    const { start } = this.props;
     const total = Number(this.state.hrs + this.state.mins + this.state.secs);
-    this.setState({ isInTimer: true });
-    console.log(total);
+    start(total);
+    const interval = setInterval(() => {
+      const { timerInfo } = this.props;
+      this.handleDecrement(timerInfo.countSecs);
+    }, 1000);
+
+    this.setState({interval});
   }
   handleRestart = () => {
-    this.setState({ isInTimer: false });
+    // Use reset action
+    // this.setState({ isInTimer: false });
+    const { reset } = this.props;
+    clearInterval(this.state.interval);
+    reset()
+  }
+
+  handleDecrement = () => {
+    const { timerInfo, decrement } = this.props;
+    const {isPause} = timerInfo
+
+    if (!isPause) {
+      decrement(timerInfo.countSecs);
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    console.log(nextProps);
+    return true;
   }
   render() {
+    const { timerInfo } = this.props;
+    const { hrs, mins, secs } = timerInfo.display;
+    console.log(timerInfo);
     return (
       <div>
-        {!this.state.isInTimer ?
+        {!timerInfo.isInTimer ?
           <React.Fragment>
             <TextField
 
@@ -86,7 +113,9 @@ class TimerContainer extends Component {
           </React.Fragment>
           :
           <React.Fragment>
-            <p>Remaining Hours       Minutes            Seconds</p>
+            <p>{`Remaining Hours: ${hrs}`}</p>
+            <p>{`Minutes: ${mins}`}</p>
+            <p>{`Seconds: ${secs}`}</p>
             <Button color="primary">Pause</Button>
             <Button color="primary" onClick={this.handleRestart}>Restart</Button>
           </React.Fragment>
