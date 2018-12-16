@@ -17,8 +17,7 @@ class TodoContainer extends Component {
   };
 
   addNewItem = itemName => {
-    /* Redux */
-    this.props.addItem(itemName);
+    /* Redux */ this.props.addItem(itemName);
     this.setState({ isUserAddingNewItem: false });
   };
 
@@ -31,6 +30,7 @@ class TodoContainer extends Component {
   };
 
   render() {
+    console.log(this.props);
     console.log(this.props.todo.items.length > 0);
     const items = this.props.todo.items.map((item, index) => {
       return (

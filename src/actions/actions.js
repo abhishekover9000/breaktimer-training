@@ -26,8 +26,8 @@ export const completeItem = payload => {
 
 export const getWeather = payload => {
   // api.openweathermap.org/data/2.5/weather?zip=94040,us
-  return async dispatch => {
-    dispatch({
+  return async dispatch2 => {
+    dispatch2({
       type: actionTypes.GET_WEATHER,
       payload: null
     });
@@ -46,7 +46,7 @@ export const getWeather = payload => {
     );
     const json = await response.json();
     if (response.ok) {
-      dispatch({ type: actionTypes.GET_WEATHER_SUCCESS, payload: json });
-    } else dispatch({ type: actionTypes.GET_WEATHER_ERROR, payload: json });
+      dispatch2({ type: actionTypes.GET_WEATHER_SUCCESS, payload: json });
+    } else dispatch2({ type: actionTypes.GET_WEATHER_ERROR, payload: json });
   };
 };

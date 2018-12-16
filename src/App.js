@@ -12,8 +12,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={createStore(rootReducer, applyMiddleware(thunk))}>
-        <WeatherContainer />
-        <TodoContainer />
+        <div> lets add things </div>
       </Provider>
     );
   }
