@@ -10,6 +10,13 @@ export const addItem = payload => {
   };
 };
 
+export const addConfig = payload => {
+  return {
+    type: actionTypes.ADD_CONFIG,
+    payload
+  };
+};
+
 export const deleteItem = payload => {
   return {
     type: actionTypes.DELETE_ITEM,
