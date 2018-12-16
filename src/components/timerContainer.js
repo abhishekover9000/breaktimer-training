@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ConfigTimer from "../components/configTimer";
+import ConfigTimer from "./configTimer";
 import Button from "@material-ui/core/Button";
 import { addConfig } from "../actions/actions";
 import { connect } from "react-redux";
@@ -27,8 +27,11 @@ class TimerContainer extends Component {
                     Config{" "}
                 </Button>
 
+                {/* {this.props.config ? (
+                    <div>{this.props.config.name},{this.props.config.time}</div>
+                ) : null} */}
                 {this.state.configPage ? (
-                    <ConfigTimer addConfig={this.addConfig} />
+                    <ConfigTimer />
                 ) : null}
             </div>
         )

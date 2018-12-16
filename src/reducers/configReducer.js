@@ -7,9 +7,8 @@ const config = (
     },
     action
   ) => {
-    const newName = state.name;
-    const newTime = state.time;
-  
+    let newName = state.name;
+    let newTime = state.time;
     switch (action.type) {
       case actionTypes.ADD_CONFIG:
         newName = action.payload.name;
